@@ -1,0 +1,17 @@
+
+Dir.chdir("../") do
+	require 'lib/xapian/indexer/version'
+
+	Gem::Specification.new do |s|
+		s.name = "xapian-indexer"
+		s.version = Xapian::Indexer::VERSION::STRING
+		s.author = "Samuel Williams"
+		s.email = "samuel.williams@oriontransfer.co.nz"
+		s.homepage = "http://www.oriontransfer.co.nz/software/xapian"
+		s.platform = Gem::Platform::RUBY
+		s.summary = "Xapian::Indexer provides a flexible spider for indexing resources."
+		s.files = FileList["{lib}/**/*"].to_a
+		
+		s.add_dependency 'xapian-core'
+	end
+end
