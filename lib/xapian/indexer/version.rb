@@ -19,7 +19,7 @@ module Xapian
 			MAJOR = 1
 			MINOR = 2
 			TINY  = 3
-			REV   = 2
+			REV   = 4
 			
 			STRING = [MAJOR, MINOR, TINY, REV].join('.')
 		end

@@ -20,6 +20,9 @@ module Xapian
 		module Extractors
 			# Represents a resource that will be indexed
 			class HTML
+				NBSP = Nokogiri::HTML("&nbsp;").text
+				WHITESPACE = /(\s|#{NBSP})+/
+				
 				def initialize(options = {})
 					@options = options
 					
@@ -40,7 +43,7 @@ module Xapian
 						first_paragraph = html.search("p").first
 					
 						if first_paragraph
-							result[:description] = first_paragraph.inner_text
+							result[:description] = first_paragraph.inner_text.gsub(WHITESPACE, " ")
 						end
 					end
 				
@@ -76,15 +79,15 @@ module Xapian
 					title_tag = html.at('html/head/title')
 					h1_tag = html.search('h1').first
 					if title_tag
-						result[:title] = title_tag.inner_text
+						result[:title] = title_tag.inner_text.gsub(WHITESPACE, " ")
 					elsif h1_tag
-						result[:title] = h1_tag.inner_text
+						result[:title] = h1_tag.inner_text.gsub(WHITESPACE, " ")
 					end
 				
 					# Extract keywords
 					meta_keywords = html.css("meta[name='keyword']").first
 					if meta_keywords
-						result[:keywords] = meta_keywords['content']
+						result[:keywords] = meta_keywords['content'].gsub(WHITESPACE, " ")
 					end
 					
 					# Remove junk elements from the html
@@ -95,7 +98,12 @@ module Xapian
 					html.search("form").remove
 					html.css('.noindex').remove
 					
-					result[:content] = html.at('html/body').inner_text
+					body = html.at('html/body')
+					
+					if body
+						# We also convert NBSP characters to inner space.
+						result[:content] = body.inner_text.gsub(WHITESPACE, " ")
+					end
 				
 					return result
 				end

@@ -13,5 +13,6 @@ Dir.chdir("../") do
 		s.files = FileList["{lib}/**/*"].to_a
 		
 		s.add_dependency 'xapian-core'
+		s.add_dependency 'nokogiri'
 	end
 end
