@@ -1,7 +1,4 @@
 
-require 'logger'
-
-require 'xapian/indexer/extensions'
 require 'xapian/indexer/version'
 require 'xapian/indexer/resource'
 require 'xapian/indexer/spider'

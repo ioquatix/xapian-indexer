@@ -20,7 +20,7 @@ module Xapian
 	module Indexer
 		module Loaders
 			class HTTP
-				UserAgent = "Xapian-Spider #{Xapian::Indexer::VERSION::STRING}"
+				UserAgent = "Xapian-Spider #{Xapian::Indexer::VERSION}"
 				
 				def initialize(options = {})
 					@options = options

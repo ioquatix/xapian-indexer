@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'digest/md5'
+require 'yaml'
 
 module Xapian
 	module Indexer
@@ -76,6 +77,7 @@ module Xapian
 			
 			def recreate(data)
 				values = YAML::load(data)
+				
 				Resource.new(values[:name], self, values)
 			end
 		end
