@@ -1,6 +1,6 @@
 # Xapian::Indexer
 
-TODO: Write a gem description
+This gem provides basic infrastructure for indexing HTML documents over HTTP into a Xapian database.
 
 ## Installation
 
@@ -86,7 +86,7 @@ The following example shows how to create a spider and index some resources:
 
 ## License
 
-Released under the MIT license.
+This code is dual licensed under the MIT license and GPLv3 license.
 
 Copyright, 2015, by [Samuel G. D. Williams](http://www.codeotaku.com/samuel-williams).
 
