@@ -18,9 +18,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'xapian/indexer/version'
-require 'xapian/indexer/resource'
-require 'xapian/indexer/spider'
+require_relative 'indexer/extensions/uri'
+
+require_relative 'indexer/version'
+require_relative 'indexer/resource'
+require_relative 'indexer/spider'
 
 module Xapian
 	module Indexer

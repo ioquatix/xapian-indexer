@@ -19,7 +19,7 @@
 # THE SOFTWARE.
 
 require 'net/http'
-require 'xapian/indexer/version'
+require_relative '../version'
 
 module Xapian
 	module Indexer
