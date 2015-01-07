@@ -18,7 +18,6 @@ require 'xapian/indexer/version'
 
 module Xapian
 	module Indexer
-		
 		module Loaders
 			class HTTP
 				UserAgent = "Xapian-Spider #{Xapian::Indexer::VERSION::STRING}"
@@ -53,10 +52,7 @@ module Xapian
 					return false
 				end
 			end
-			
-			
 		end
-		
 	end
 end
 

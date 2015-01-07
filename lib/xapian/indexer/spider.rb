@@ -16,6 +16,8 @@
 require 'xapian'
 require 'set'
 
+require 'logger'
+
 module Xapian
 	module Indexer
 		# Represents a process which consumes resources into the database
