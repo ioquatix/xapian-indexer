@@ -22,20 +22,42 @@ require 'uri'
 
 class URI::Generic
 	# This change allows you to merge relative URLs which otherwise isn't possible.
-	def merge0(oth)
+	def merge(oth)
 		oth = parser.send(:convert_to_uri, oth)
 		
-		if self.absolute? && oth.absolute?
-			#raise BadURIError,
-			#  "both URI are absolute"
-			# hmm... should return oth for usability?
-			return oth, oth
-		end
+		return oth if oth.absolute?
 		
-		if self.absolute?
-			return self.dup, oth
-		else
-			return oth, oth
+		base = self.dup
+		rel = oth
+		
+		authority = rel.userinfo || rel.host || rel.port
+
+		# RFC2396, Section 5.2, 2)
+		if (rel.path.nil? || rel.path.empty?) && !authority && !rel.query
+			base.fragment=(rel.fragment) if rel.fragment
+			return base
 		end
+
+		base.query = nil
+		base.fragment=(nil)
+
+		# RFC2396, Section 5.2, 4)
+		if !authority
+			base.set_path(merge_path(base.path, rel.path)) if base.path && rel.path
+		else
+			# RFC2396, Section 5.2, 4)
+			base.set_path(rel.path) if rel.path
+		end
+
+		# RFC2396, Section 5.2, 7)
+		base.set_userinfo(rel.userinfo) if rel.userinfo
+		base.set_host(rel.host)         if rel.host
+		base.set_port(rel.port)         if rel.port
+		base.query = rel.query       if rel.query
+		base.fragment=(rel.fragment) if rel.fragment
+
+		return base
 	end
+	
+	alias + merge
 end

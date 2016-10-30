@@ -20,6 +20,6 @@
 
 module Xapian
 	module Indexer
-		VERSION = "1.2.20.1"
+		VERSION = "1.2.20.2"
 	end
 end
